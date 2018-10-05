@@ -3,12 +3,15 @@
 #' @param j component of mdl
 #' @param lMS list with lMS[[1]] = M an [N,N,T,T] array and lMS[[2]] = S[T,N]
 #' matrix
+#' @param Sig list with current Sigma parameter estimates
+#' @param mdl sigex model object
+#' @param invGam list of inverse covariance matrices for over-diff signals
 #'
 #' @return NxN updated Sigma matrix
 #' @export
 #'
 
-EMcritical = function(j, Sig, lMS, mdl){
+EMcritical = function(j, Sig, lMS, mdl, invGam){
   M = lMS[[1]]
   S = lMS[[2]]
   d = length(mdl[[3]][[j]])

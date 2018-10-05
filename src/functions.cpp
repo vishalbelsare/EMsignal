@@ -9,7 +9,7 @@ arma::mat subBlock(const arma::mat& m, const int& N, const int& el, const int& k
 }
 
 // [[Rcpp::export]]
-arma::field<arma::mat> matrixDiff(const arma::mat& m, const int& N,
+arma::mat matrixDiff(const arma::mat& m, const int& N,
                                   const int& TT, const arma::vec& delta) {
   // convert input block matrix to 4-touple field
   arma::field<arma::mat> M(TT,TT);
@@ -18,7 +18,8 @@ arma::field<arma::mat> matrixDiff(const arma::mat& m, const int& N,
       M(el, k) = subBlock(m, N, el+1, k+1);
     }
   }
-  //
+
+  // Construct differenced M matrix in field format
   int dd = delta.size() - 1;
   // Rprintf("dd = %i", dd);
   arma::field<arma::mat> Mout(TT-dd, TT-dd);
@@ -35,5 +36,13 @@ arma::field<arma::mat> matrixDiff(const arma::mat& m, const int& N,
       }
     }
   }
-  return Mout;
+
+  // Convert Field form to big block form
+  arma::mat bigM(N*(TT-dd), N*(TT-dd));
+  for (int el = 0; el < (TT-dd); el++) {
+    for (int k = 0; k < (TT-dd); k++) {
+      bigM.submat(el*N, k*N, (el+1)*N-1, (k+1)*N-1) = Mout(el, k);
+    }
+  }
+  return bigM;
 }

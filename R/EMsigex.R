@@ -17,6 +17,9 @@ EMsigex <- function(data, mdl, transform="none"){
   diff.over = list()
   for(j in 1:J) diff.over[[j]] = sigex.delta(mdl = mdl, omits = j)
 
+  # put together inverse covariance matrices of overdiff series: D's
+  invGam = builD(mdl)
+
   x <- t(data)
   N <- dim(x)[1]
   TT <- dim(x)[2]
@@ -65,10 +68,10 @@ EMsigex <- function(data, mdl, transform="none"){
   # ---- Run EMiterate ----
 
   for(i in 1:10) {
-    out = EMiterate(Sig, lMS); (Sig = out[[1]]); lMS = out[[2]]
-    A = labsdiff(Sig, Sig.mle)
-    print(A)
-    print(sum(unlist(lapply(A, sum))))
+    print(i)
+    out = EMiterate(Sig, lMS, invGam); (Sig = out[[1]]); lMS = out[[2]]
+    print(Sig)
+    # print(sum(unlist(lapply(A, sum))))
     print("------------------------------------")
   }
 }

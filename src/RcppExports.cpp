@@ -21,7 +21,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // matrixDiff
-arma::field<arma::mat> matrixDiff(const arma::mat& m, const int& N, const int& TT, const arma::vec& delta);
+arma::mat matrixDiff(const arma::mat& m, const int& N, const int& TT, const arma::vec& delta);
 RcppExport SEXP _EMsigex_matrixDiff(SEXP mSEXP, SEXP NSEXP, SEXP TTSEXP, SEXP deltaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

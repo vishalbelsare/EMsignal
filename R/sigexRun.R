@@ -31,13 +31,17 @@ sigexRun = function(param, data, mdl){
   diff.full = round(diff.full) # this is not needed in updated sigex package
   d.full = length(diff.full)
 
+    # Build differencing matrix
+  delta0pad = c(diff.full, rep(0, TT-d.full+1))
+  D = suppressWarnings(matrix(delta0pad, nrow = TT-d.full,
+                              ncol = TT, byrow = TRUE))
 
   # form output into paper notation
   # M = list()
   M.diff = list()
   for(j in 1:J){
 
-    print(j)
+    # print(sprintf("matrix differencing. j=%i", j))
 
     # M[[j]] = block2array(signal[[j]][[2]], N = N, TT = TT)
     # # need to define d the full differencing order
@@ -50,9 +54,10 @@ sigexRun = function(param, data, mdl){
 
   S = list()
   for(j in 1:J){
+    # print(sprintf("signal differencing. j=%i", j))
     S[[j]] = extract[[j]][[1]]
     S[[j]] = D %*% S[[j]]
   }
 
-  return(list(M, S))
+  return(list(M.diff, S))
 }
