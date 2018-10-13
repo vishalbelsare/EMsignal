@@ -25,7 +25,7 @@ builD = function(mdl){
   # toeplitz matrix for each over-differenced signal
   Gam = list()
   for(j in 1:J){
-    Gam[[j]] = toeplitz(ARMAacvf(ma = diff.over[[j]], lag.max=(TT-d.full-1)))
+    Gam[[j]] = toeplitz(ARMAacvf(ma = diff.over[[j]], lag.max=(TT-d.full)))
   }
 
   invGam = lapply(Gam, solve)

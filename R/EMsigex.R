@@ -62,10 +62,13 @@ EMsigex <- function(data, mdl, transform="none"){
   # ---- Initialize values for first iteration ---------------------------------
 
   param = param.mom
+  Sig = param2sig(param)
 
   lMS = sigexRun(param = param, data = data, mdl = mdl)
 
   # ---- Run EMiterate ----
+
+  invGam = builD(mdl = mdl)
 
   for(i in 1:10) {
     print(i)

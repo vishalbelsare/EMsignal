@@ -3,7 +3,7 @@ library(mvtnorm)
 library(EMsigex)
 
 # ---- Simulate Data ----------------------------------------------------------
-N = 2
+N = 3
 T <- TT <- 300
 t = 1:T
 Phi=diag(N)

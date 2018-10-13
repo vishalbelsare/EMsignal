@@ -12,21 +12,32 @@
 #'
 
 EMcritical = function(j, Sig, lMS, mdl, invGam){
-  M = lMS[[1]]
+
+  N = dim(Sig[[j]])[1]
+  TT = length(mdl[[4]][[1]])
+
+  d = unlist(lapply(mdl[[3]], length)) - 1 # diff order of each component
+  d = sum(d) # full differencing order
+
+  Mj = lMS[[1]][[j]]
+  Mj = block2array(Mj, N, TT-d-1)
   S = lMS[[2]]
-  d = length(mdl[[3]][[j]])
 
   # put together overdifferencing operator coef vectors
-  diff.over = sigex.delta(mdl = mdl, omits = j)
+  # diff.over = sigex.delta(mdl = mdl, omits = j)
 
-  Mj = M[[j]][,,k,el] - M[[j]][,,k-12,el] -
-       M[[j]][,,k,el-12] + M[[j]][,,k-12,el-12]
+  # Mj = M[[j]][,,k,el] - M[[j]][,,k-12,el] -
+  #      M[[j]][,,k,el-12] + M[[j]][,,k-12,el-12]
+
+  invGam = builD(mdl = mdl) # THIS IS GETTING CALLED TOO MANY TIMES! FIX LATER
 
   outSig = matrix(0, N, N)
-  for(k in (d+1):TT){
-    for(el in (d+1):TT){
-      D = invGam[[j]][k-d, el-d] # * invSig[[1]]
-      new.term =  D * (Mj + (S[[j]][k-d, ] %*% t(S[[j]][el-d, ])))
+  for(k in (d+1):(TT-1)){
+    for(el in (d+1):(TT-1)){
+
+      # print(sprintf("k = %i   el = %i", k-d, el-d))
+
+      new.term =  invGam[[j]][k-d, el-d] * (Mj[, k-d, , el-d] + (S[[j]][k-d, ] %*% t(S[[j]][el-d, ])))
       outSig = outSig + new.term
     }}
   outSig = outSig / (TT-d)
