@@ -2,7 +2,6 @@
 % Please edit documentation in R/sigexRun.R, R/sigexRun_1-B12.R
 \name{sigexRun}
 \alias{sigexRun}
-\alias{sigexRun}
 \title{Runs sigex for EM algorithm}
 \usage{
 sigexRun(param)

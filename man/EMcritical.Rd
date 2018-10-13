@@ -2,7 +2,6 @@
 % Please edit documentation in R/EMcritical.R, R/EMcritical_1-B12.R
 \name{EMcritical}
 \alias{EMcritical}
-\alias{EMcritical}
 \title{Calculate updated Sigma values at EM critical point}
 \usage{
 EMcritical(j, Sig, lMS)
@@ -12,8 +11,14 @@ EMcritical(j, Sig, lMS)
 \arguments{
 \item{j}{component of mdl}
 
+\item{Sig}{list with current Sigma parameter estimates}
+
 \item{lMS}{list with lMS[[1]] = M an [N,N,T,T] array and lMS[[2]] = S[T,N]
 matrix}
+
+\item{mdl}{sigex model object}
+
+\item{invGam}{list of inverse covariance matrices for over-diff signals}
 
 \item{j}{component of mdl}
 

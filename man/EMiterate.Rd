@@ -2,7 +2,6 @@
 % Please edit documentation in R/EMiterate.R, R/EMiterate_1-B12.R
 \name{EMiterate}
 \alias{EMiterate}
-\alias{EMiterate}
 \title{single iteration of EM algorithm}
 \usage{
 EMiterate(Sig, lMS)
@@ -14,6 +13,8 @@ EMiterate(Sig, lMS)
 
 \item{lMS}{list with lMS[[1]] = M an [N,N,T,T] array and lMS[[2]] = S[T,N]
 matrix}
+
+\item{invGam}{list with inverse covariance matrix of over-diff signals}
 
 \item{Sig}{list with each element of list being an NxN sigma matrix}
 
