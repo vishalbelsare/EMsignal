@@ -18,7 +18,7 @@ sigexRun = function(param, data, mdl){
 
   signal = rep(list(matrix(-99, N*TT, N*TT)), J) # initalize storage
   for(j in 1:J){
-    # print(j)
+    print(sprintf("estimating signal: %i", j))
     signal[[j]] = sigex.signal(data, param, mdl, j)
   }
 
