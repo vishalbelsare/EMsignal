@@ -91,6 +91,8 @@ param.mle <- sigex.psi2par(psi,mdl,data)
 
 
 # ---- DMA for model ----------------------------------------------------------
+param <- param.mle # pick where parameters come from (default, mle, mom, etc)
+
 signal.trendann <- sigex.signal(data,param,mdl,1)
 signal.seas     <- sigex.signal(data,param,mdl,2)
 signal.irr      <- sigex.signal(data,param,mdl,3)
@@ -118,7 +120,7 @@ s0.hat = extract.irr[[1]][, subseries]
 # --- Filter weights ----------------------------------------------------------
 FF = signal.trendann[[1]]
 FF = block2array(FF, N, T)
-fw = FF[1, 2, T/2, ]
+fw = FF[1, T/2, 1, ]
 plot(fw, type="l")
 abline(v=seq(T/2, T, 12), lty="dotted")
 sum(fw)
