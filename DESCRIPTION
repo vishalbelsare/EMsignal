@@ -9,3 +9,4 @@ Description: More about what it does (maybe more than one line)
 License: What license is it under?
 Imports: Rcpp (>= 0.12.14), mvtnorm, sigex
 LinkingTo: Rcpp, RcppArmadillo
+RoxygenNote: 6.1.0

@@ -10,7 +10,7 @@ arma::mat subBlock(const arma::mat& m, const int& N, const int& el, const int& k
 
 // [[Rcpp::export]]
 arma::mat matrixDiff(const arma::mat& m, const int& N,
-                                  const int& TT, const arma::vec& delta) {
+                     const int& TT, const arma::vec& delta) {
   // convert input block matrix to 4-touple field
   arma::field<arma::mat> M(TT,TT);
   for (int el = 0; el < TT; el++) {
