@@ -55,8 +55,8 @@ sigexRun = function(param, data, mdl){
       for(t in 1:d.full){
         #print(c(k, el, s, t))
 
-        M.diff[[j]][,,k-d.full, el-d.full] = diff.full[s] * diff.full[t] *
-                                              M[[j]][,,k-s,el-t]
+        M.diff[[j]][,k-d.full,, el-d.full] = diff.full[s] * diff.full[t] *
+                                              M[[j]][,k-s,,el-t]
       }}
     }}
   }
